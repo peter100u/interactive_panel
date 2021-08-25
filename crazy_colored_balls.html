@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0 maximum-scale=1.0, user-scalable=no viewport-fit=cover">
+    <title>艺术画板</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-y: hidden;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+
+<body>
+
+</body>
+
+<script>
+
+    const step = 40;
+
+    function getRandomColor() {
+        const r = Math.round(Math.random() * 255), g = Math.round(Math.random() * 255),
+            b = Math.round(Math.random() * 255);
+        const color = r << 16 | g << 8 | b;
+        return "#" + color.toString(16)
+    }
+
+
+    let button;
+    let permissionGranted = false;
+
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+        // if ((typeof (DeviceOrientationEvent) != 'undefined' && typeof (DeviceOrientationEvent.requestPermission) === 'function')) {
+        //     background(255, 0, 0);
+        //     button = createButton('请授权传感器');
+        //     button.style("font-size", '24px');
+        //     button.center();
+        //     button.mousePressed(requestAccess);
+        // } else {
+        //     background(0, 255, 0);
+        //     textSize(24);
+        //     text('non ios 13 device', 10, 100);
+        // }
+    }
+
+    function requestAccess() {
+        DeviceOrientationEvent.requestPermission()
+            .then(response => {
+                if (response == 'granted') {
+                    permissionGranted = true;
+                }
+            }).catch(console.error);
+    }
+
+    let value = 0;
+
+    function draw() {
+        fill(value);
+        rect(25, 25, 50, 50);
+    }
+
+    function deviceMoved() {
+        value = value + 5;
+        if (value > 255) {
+            value = 0;
+        }
+    }
+
+    class CrazyBall {
+        constructor(x, y, color, radius) {
+            this.x = x;
+            this.y = y;
+            this.color = color;
+            this.radius = radius;
+        }
+
+        display() {
+            ellipseMode(CORNER);
+            noStroke();
+            fill(getRandomColor());
+            circle(this.x, this.y, this.radius);
+        }
+
+        update() {
+
+        }
+    }
+</script>
+</html>

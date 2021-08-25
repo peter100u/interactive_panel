@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Title</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"
+            integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA=="
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+</body>
+<script>
+
+    let points = [];
+
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+        background(0);
+    }
+
+    function draw() {
+        colorMode(HSB);
+
+        if (mouseX > 0 && mouseY > 0) {
+            points.push({x: mouseX, y: mouseY});
+        }
+        strokeWeight(1);
+        stroke(color(frameCount % 360, 100, 70));
+
+        const lastPoint = points[points.length - 1];
+        const last2ndPoint = points[points.length - 2];
+
+        if (lastPoint && last2ndPoint) {
+            line(lastPoint.x, lastPoint.y, last2ndPoint.x, last2ndPoint.y);
+            points.forEach((p, i) => {
+                let dx = points[i].x - lastPoint.x;
+                let dy = points[i].y - lastPoint.y;
+                let d = dx * dx + dy * dy;
+                if (d < 9000) {
+                    line(points[i].x, points[i].y, lastPoint.x, lastPoint.y);
+                }
+            });
+        }
+    }
+</script>
+</html>

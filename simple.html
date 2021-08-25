@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0 maximum-scale=1.0, user-scalable=no viewport-fit=cover">
+    <title>艺术画板</title>
+    <script src="https://6172-art-drawing-4gtu37ekd3cee39f-1256965862.tcb.qcloud.la/js/p5.min.js?sign=dde847a1e2ec69221f14b956f846ceb0&t=1629177345"></script>
+    <script src="base.js"></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-y: hidden;
+        }
+    </style>
+</head>
+
+<body>
+<main>
+</main>
+</body>
+
+<script>
+
+
+    function setup() {
+        console.log(window.document.documentElement.clientWidth);
+        let clientWidth = window.document.documentElement.clientWidth;
+        let clientHeight = window.document.documentElement.clientHeight;
+        createCanvas(clientWidth, clientHeight);
+    }
+
+
+    function draw() {
+
+        if (mouseIsPressed) {
+            fill(0);
+        } else {
+            fill(255);
+        }
+
+        if (mouseX != 0 && mouseY != 0) {
+            ellipse(mouseX, mouseY, 10, 10);
+        }
+    }
+
+</script>
+</html>

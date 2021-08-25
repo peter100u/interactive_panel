@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+
+</body>
+
+<script>
+
+
+    let degree = 10;
+
+    function setup() {
+        createCanvas(800, 800);
+        background(0);
+        rectMode(CENTER);
+        console.log(100002 % 10);
+    }
+
+    function draw() {
+
+        let angle = radians(degree);
+        strokeWeight(2);
+        // stroke(millis() % 255, 255 - millis() % 255, 255 - millis() % 255, 255);
+        noFill();
+        translate(width / 2, height / 2);
+        // rotate(angle);
+        rect(0, 0, 550, 550);
+        rect(0, 0, 370, 370);
+        rect(0, 0, 200, 200);
+        rect(0, 0, 100, 100);
+        degree += 2;
+    }
+
+</script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"
+            integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA=="
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+
+</body>
+
+<script>
+
+    function getRandomColor() {
+        const r = Math.round(Math.random() * 255), g = Math.round(Math.random() * 255),
+            b = Math.round(Math.random() * 255);
+        const color = r << 16 | g << 8 | b;
+        return "#" + color.toString(16)
+    }
+
+    class Bubble {
+        constructor(x, y, size, c) {
+            this.x = x;
+            this.y = y;
+            this.size = size;
+            this.c = c;
+        }
+
+        display() {
+            noStroke();
+            fill(this.c);
+            circle(this.x, this.y, this.size);
+        }
+
+        update() {
+            this.y -= 5;
+            this.x += random(-5, 5);
+        }
+
+        isDead() {
+            if (this.y < 0) {
+                return true;
+            }
+        }
+    }
+
+    const bubbles = [];
+
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+    }
+
+    let angle = 0;
+
+    function draw() {
+        background('#16a596');
+        rectMode(CENTER);
+        let ang = radians(angle);
+        let y1 = height / 2 + 40 * sin(ang);
+        let y2 = height / 2 + 40 * cos(ang);
+        fill('#fa26a0');
+        circle(width / 2 - 100, y1, 100);
+        fill('#05dfd7');
+        circle(width / 2 + 100, y2, 100);
+        angle++;
+    }
+</script>
+</html>

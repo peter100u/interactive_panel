@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"
+            integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA=="
+            crossorigin="anonymous"
+    ></script>
+</head>
+<body>
+
+</body>
+
+<script>
+    let x = 0;
+    let y = 200;
+    let fr = 60; // 用变量 fr 代表帧率，初始值设为 60
+    let slow = false; // 是用一个布尔变量 slow，作为动画速度的标志
+
+    function setup() {
+        createCanvas(400, 400);
+    }
+
+    function draw() {
+        background("#31326f");
+        x += 1; // x = x + 1, 每次执行 draw() 函数，x 的值都会 + 1
+
+        noStroke();
+        fill("#ffdada");
+
+        // 在坐标(x, y) 位置绘制一个正方形，边长为 50. 正方形的 y 左边不变，x 左边会随着 draw() 函数循环执行而增加，形成从画布左边向右边移动的动画
+        square(x, y, 50);
+        // 在(x, y) 位置，用 text() 函数绘制出文字，文字的内容为当前变量 fr 的值。这样在正方形移动的时候，我们可以看到现在 fr 的值
+        text(fr, x, y);
+
+        // 以下用 if 语句，当 slow 变量为 true 时，帧率设为 15（fr = 15)；slow 为 false 时，fr = 60
+        if (slow) {
+            fr = 15;
+        } else {
+            fr = 60;
+        }
+
+        frameRate(fr);
+        // 用 frameRate() 函数来设置帧率，fr 作为其参数。
+        // 这样，当 fr = 15 时，draw() 函数每秒执行 15 次；对应地，当 fr = 60 时，每秒执行 60 次。由于每次执行 draw() 函数，变量 x 都会 +1，因此不同帧率下正方形移动的速率就会明显不同。
+
+        if (x > width) {
+            x = 0; // 当真方形的 x 坐标超过画布的宽度 width 时，将 x 设为 0，也就是让正方形回到画布左边，循环起来。
+        }
+    }
+
+    function mousePressed() {
+        // 利用 P5 自带的 mousePressed() 函数，每次鼠标点击的时候，翻转布尔变量 slow 值。
+        // slow = !slow 会将布尔变量变为相反的值，从 true 变为 false， 或从 fasle 变为 true
+        slow = !slow;
+    }
+</script>
+</html>
